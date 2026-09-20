@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام الكلية العسكرية</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0b0f14;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box {
+      width: 90%;
+      max-width: 500px;
+      background: #151b23;
+      border: 1px solid #303946;
+      border-radius: 18px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #aab4c0;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #394452;
+      background: #0e1319;
+      color: white;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #5865f2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4752c4;
+    }
+
+    .error {
+      color: #ff5c5c;
+      margin-top: 15px;
+      display: none;
+    }
+
+    #exam {
+      display: none;
+    }
+
+    .question {
+      font-size: 21px;
+      margin: 25px 0;
+    }
+
+    .answer {
+      background: #202936;
+      margin-top: 10px;
+    }
+
+    .answer:hover {
+      background: #2b3645;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <!-- تسجيل الدخول -->
+    <div id="login">
+      <h1>🎓 نظام الكلية العسكرية</h1>
+
+      <div class="subtitle">
+        يرجى إدخال كلمة المرور للدخول إلى النظام
+      </div>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="كلمة المرور"
+      >
+
+      <button onclick="login()">دخول</button>
+
+      <div class="error" id="error">
+        كلمة المرور غير صحيحة
+      </div>
+    </div>
+
+
+    <!-- الاختبار -->
+    <div id="exam">
+
+      <h1>📋 الاختبار العسكري</h1>
+
+      <div id="questionNumber"></div>
+
+      <div class="question" id="question"></div>
+
+      <div id="answers"></div>
+
+    </div>
+
+
+    <!-- النتيجة -->
+    <div class="result" id="result">
+
+      <h1>📊 نتيجة الاختبار</h1>
+
+      <p id="score"></p>
+
+      <button onclick="location.reload()">
+        العودة
+      </button>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+  // كلمة المرور
+  const PASSWORD = "1234";
+
+
+  // الأسئلة
+  const questions = [
+
+    {
+      question: "هل مخالفة أمر القيادة شيء مهم؟",
+      answers: ["نعم", "لا"],
+      correct: 0
+    },
+
+    {
+      question: "هل يجب احترام جميع أوامر القيادة؟",
+      answers: ["نعم", "لا"],
+      correct: 0
+    },
+
+    {
+      question: "هل يسمح باستخدام صلاحيات المنصب لمصلحة شخصية؟",
+      answers: ["نعم", "لا"],
+      correct: 1
+    }
+
+  ];
+
+
+  let currentQuestion = 0;
+  let score = 0;
+
+
+  function login() {
+
+    const password =
+      document.getElementById("password").value;
+
+    if (password === PASSWORD) {
+
+      document.getElementById("login").style.display = "none";
+
+      document.getElementById("exam").style.display = "block";
+
+      showQuestion();
+
+    } else {
+
+      document.getElementById("error").style.display = "block";
+
+    }
+
+  }
+
+
+  function showQuestion() {
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionNumber").innerText =
+      "السؤال " + (currentQuestion + 1) +
+      " من " + questions.length;
+
+    document.getElementById("question").innerText =
+      q.question;
+
+
+    const answers =
+      document.getElementById("answers");
+
+    answers.innerHTML = "";
+
+
+    q.answers.forEach((answer, index) => {
+
+      const button =
+        document.createElement("button");
+
+      button.className = "answer";
+
+      button.innerText =
+        (index + 1) + " - " + answer;
+
+      button.onclick = function() {
+
+        selectAnswer(index);
+
+      };
+
+      answers.appendChild(button);
+
+    });
+
+  }
+
+
+  function selectAnswer(index) {
+
+    if (index === questions[currentQuestion].correct) {
+
+      score++;
+
+    }
+
+    currentQuestion++;
+
+
+    if (currentQuestion < questions.length) {
+
+      showQuestion();
+
+    } else {
+
+      showResult();
+
+    }
+
+  }
+
+
+  function showResult() {
+
+    document.getElementById("exam").style.display = "none";
+
+    document.getElementById("result").style.display = "block";
+
+
+    document.getElementById("score").innerText =
+      "نتيجتك: " +
+      score +
+      " / " +
+      questions.length;
+
+  }
+
+</script>
+
+</body>
+</html>
