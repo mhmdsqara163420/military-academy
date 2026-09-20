@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام الكلية العسكرية</title>
 
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b0b0b;
+    color: white;
+    text-align: center;
+}
+
+.box {
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto;
+    background: #151515;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #000;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+input {
+    width: 90%;
+    padding: 14px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+
+.question {
+    text-align: right;
+    margin: 25px 0;
+    padding: 20px;
+    background: #202020;
+    border-radius: 10px;
+}
+
+.result {
+    font-size: 25px;
+    margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- الصفحة الرئيسية -->
+<div id="home" class="box">
+    <h1>🏛️ نظام المقابلات العسكرية</h1>
+
+    <button onclick="openPage('militaryLogin')">
+        🎖️ مقابلة القانق يونت
+    </button>
+
+    <button onclick="openPage('bravoLogin')">
+        🦅 مقابلة برافو تيم
+    </button>
+</div>
+
+
+<!-- كلمة مرور القانق يونت -->
+<div id="militaryLogin" class="box hidden">
+    <h1>🔐 مقابلة القانق يونت</h1>
+
+    <input type="password" id="militaryPassword" placeholder="أدخل كلمة المرور">
+
+    <button onclick="loginMilitary()">دخول</button>
+
+    <p id="militaryError" class="error">
+        ❌ كلمة المرور غير صحيحة
+    </p>
+
+    <button onclick="openPage('home')">رجوع</button>
+</div>
+
+
+<!-- اختبار القانق يونت -->
+<div id="military" class="box hidden">
+    <h1>🎖️ اختبار القانق يونت</h1>
+
+    <form id="militaryForm">
+
+        <div class="question">
+            <h3>1. هل يحق لك الخروج من السيرفر بدون إذن القيادة؟</h3>
+            <label><input type="radio" name="m1" value="1"> نعم</label><br>
+            <label><input type="radio" name="m1" value="2"> لا وتتحاسب عليها</label>
+        </div>
+
+        <div class="question">
+            <h3>2. هل يحق للأشخاص دخول مقر القانق يونت؟</h3>
+            <label><input type="radio" name="m2" value="1"> نعم</label><br>
+            <label><input type="radio" name="m2" value="2"> لا يحق له</label>
+        </div>
+
+        <div class="question">
+            <h3>3. هل يحق للأفراد مخالفة أوامر القائد؟</h3>
+            <label><input type="radio" name="m3" value="1"> نعم</label><br>
+            <label><input type="radio" name="m3" value="2"> لا</label>
+        </div>
+
+        <div class="question">
+            <h3>4. ماذا تفعل عند رؤية شخص مخالف للنظام؟</h3>
+            <label><input type="radio" name="m4" value="1"> أتجاهله</label><br>
+            <label><input type="radio" name="m4" value="2"> أصوره وأبلغ الضباط أو القادة</label>
+        </div>
+
+        <div class="question">
+            <h3>5. هل الالتزام باللبس مهم؟</h3>
+            <label><input type="radio" name="m5" value="1"> نعم</label><br>
+            <label><input type="radio" name="m5" value="2"> لا</label>
+        </div>
+
+        <div class="question">
+            <h3>6. لو رأيت شخص مخالف للبس ماذا تفعل؟</h3>
+            <label><input type="radio" name="m6" value="1"> أتجاهله</label><br>
+            <label><input type="radio" name="m6" value="2"> أصوره وأبلغ القادة</label>
+        </div>
+
+        <div class="question">
+            <h3>7. هل من الضروري أن المواطن لا يرافقك بالسيارة؟</h3>
+            <label><input type="radio" name="m7" value="1"> نعم</label><br>
+            <label><input type="radio" name="m7" value="2"> لا</label>
+        </div>
+
+        <div class="question">
+            <h3>8. لو صرت ضابط هل بتستغل سلطتك؟</h3>
+            <label><input type="radio" name="m8" value="1"> نعم</label><br>
+            <label><input type="radio" name="m8" value="2"> لا</label>
+        </div>
+
+        <div class="question">
+            <h3>9. هل مخالفة أمر من القادة يعتبر شيء عادي؟</h3>
+            <label><input type="radio" name="m9" value="1"> نعم</label><br>
+            <label><input type="radio" name="m9" value="2"> لا وتتحاسب عليه</label>
+        </div>
+
+        <div class="question">
+            <h3>10. لو اكتشفت شخص يسرب المعلومات كيف تتصرف؟</h3>
+            <label><input type="radio" name="m10" value="1"> أتجاهله</label><br>
+            <label><input type="radio" name="m10" value="2"> أساعده</label><br>
+            <label><input type="radio" name="m10" value="3"> أبلغ القادة وأحاول جلب الأدلة</label>
+        </div>
+
+        <button type="button" onclick="checkMilitary()">
+            إنهاء الاختبار
+        </button>
+
+    </form>
+
+    <div id="militaryResult" class="result"></div>
+</div>
+
+
+<!-- كلمة مرور برافو -->
+<div id="bravoLogin" class="box hidden">
+    <h1>🦅 مقابلة برافو تيم</h1>
+
+    <input type="password" id="bravoPassword" placeholder="أدخل كلمة المرور">
+
+    <button onclick="loginBravo()">دخول</button>
+
+    <p id="bravoError" class="error">
+        ❌ كلمة المرور غير صحيحة
+    </p>
+
+    <button onclick="openPage('home')">رجوع</button>
+</div>
+
+
+<!-- اختبار برافو -->
+<div id="bravo" class="box hidden">
+    <h1>🦅 اختبار BRAVO TEAM</h1>
+
+    <form>
+
+        <div class="question">
+            <h3>1. لو جاك أمر من قائد الفرقة وبنفس الوقت جاك أمر من قائد القطاع والفرقة كانت مفعلة، من رح تنفذ أوامره؟</h3>
+            <label><input type="radio" name="b1" value="1"> قائد القطاع</label><br>
+            <label><input type="radio" name="b1" value="2"> قائد الفرقة</label>
+        </div>
+
+        <div class="question">
+            <h3>2. هل تستطيع تنفيذ مهمة سرية جدًا ولا تخبر القادة؟</h3>
+            <label><input type="radio" name="b2" value="1"> نعم</label><br>
+            <label><input type="radio" name="b2" value="2"> لا، أخبر القادة</label>
+        </div>
+
+        <div class="question">
+            <h3>3. لو كان قائد الفرقة ما مفعل الفرقة، هل تستطيع ارتداء لبس الفرقة؟</h3>
+            <label><input type="radio" name="b3" value="1"> نعم</label><br>
+            <label><input type="radio" name="b3" value="2"> لا</label>
+        </div>
+
+        <div class="question">
+            <h3>4. هل تستطيع مشاركة أسرار الفرقة؟</h3>
+            <label><input type="radio" name="b4" value="1"> نعم</label><br>
+            <label><input type="radio" name="b4" value="2"> لا لأن فرقة برافو تيم لها أسرارها</label>
+        </div>
+
+        <div class="question">
+            <h3>5. لو تم إعطائك أمر من قائد الفرقة، هل بتنفذ الأمر بدون جدال؟</h3>
+            <label><input type="radio" name="b5" value="1"> نعم</label><br>
+            <label><input type="radio" name="b5" value="2"> لا وأفهم السبب</label>
+        </div>
+
+        <button type="button" onclick="checkBravo()">
+            إنهاء الاختبار
+        </button>
+
+    </form>
+
+    <div id="bravoResult" class="result"></div>
+</div>
+
+
+<script>
+
+function openPage(page) {
+
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("militaryLogin").classList.add("hidden");
+    document.getElementById("military").classList.add("hidden");
+    document.getElementById("bravoLogin").classList.add("hidden");
+    document.getElementById("bravo").classList.add("hidden");
+
+    document.getElementById(page).classList.remove("hidden");
+}
+
+
+// كلمة مرور القانق يونت
+function loginMilitary() {
+
+    var password = document.getElementById("militaryPassword").value;
+
+    if (password === "6189") {
+        openPage("military");
+    } else {
+        document.getElementById("militaryError").style.display = "block";
+    }
+}
+
+
+// اختبار القانق يونت
+function checkMilitary() {
+
+    var correct = [2,2,2,2,1,2,1,2,2,3];
+    var score = 0;
+
+    for (var i = 1; i <= 10; i++) {
+
+        var answer = document.querySelector('input[name="m' + i + '"]:checked');
+
+        if (answer && Number(answer.value) === correct[i-1]) {
+            score++;
+        }
+    }
+
+    if (score >= 7) {
+        document.getElementById("militaryResult").innerHTML =
+        "🟢 مقبول<br>درجتك: " + score + " / 10<br><br>" +
+        "<button onclick=\"openPage('bravoLogin')\">بدء أسئلة BRAVO TEAM</button>";
+    } else {
+        document.getElementById("militaryResult").innerHTML =
+        "🔴 مرفوض<br>درجتك: " + score + " / 10";
+    }
+}
+
+
+// كلمة مرور برافو
+function loginBravo() {
+
+    var password = document.getElementById("bravoPassword").value;
+
+    if (password === "8916") {
+        openPage("bravo");
+    } else {
+        document.getElementById("bravoError").style.display = "block";
+    }
+}
+
+
+// اختبار برافو
+function checkBravo() {
+
+    var correct = [2,2,2,2,1];
+    var score = 0;
+
+    for (var i = 1; i <= 5; i++) {
+
+        var answer = document.querySelector('input[name="b' + i + '"]:checked');
+
+        if (answer && Number(answer.value) === correct[i-1]) {
+            score++;
+        }
+    }
+
+    if (score >= 3) {
+        document.getElementById("bravoResult").innerHTML =
+        "🟢 مقبول<br>درجتك: " + score + " / 5";
+    } else {
+        document.getElementById("bravoResult").innerHTML =
+        "🔴 مرفوض<br>درجتك: " + score + " / 5";
+    }
+}
+
+</script>
+
+</body>
+</html>
